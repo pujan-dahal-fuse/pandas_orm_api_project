@@ -133,7 +133,8 @@ def create_schema(engine):
                  Column('bill_id', Integer, primary_key=True, autoincrement=True),
                  Column('date', Date, nullable=False),
                  Column('transaction_completed', Boolean, default=False, nullable=False),
-                 Column('customer_id', ForeignKey('customer.customer_id', onupdate='CASCADE'), nullable=False)
+                 Column('customer_id', ForeignKey('customer.customer_id', onupdate='CASCADE'), nullable=False),
+                 Column('store_id', ForeignKey('store.store_id', onupdate='CASCADE'), nullable=False)
                  )
 
     # since product_bill has foreign key attribute bill_id, so bill must be created first
@@ -248,11 +249,11 @@ def insert_initial_records(engine):
     ]
 
     bill_list = [
-        {'bill_id': 70000001, 'date': '2022-09-23', 'customer_id': 60000001, 'transaction_completed': True},
-        {'bill_id': 70000002, 'date': '2022-09-24', 'customer_id': 60000001, 'transaction_completed': True},
-        {'bill_id': 70000003, 'date': '2022-09-25', 'customer_id': 60000002, 'transaction_completed': True},
-        {'bill_id': 70000004, 'date': '2022-09-25', 'customer_id': 60000002, 'transaction_completed': True},
-        {'bill_id': 70000005, 'date': '2022-10-22', 'customer_id': 60000003, 'transaction_completed': True}
+        {'bill_id': 70000001, 'store_id': 10000001, 'date': '2022-09-23', 'customer_id': 60000001, 'transaction_completed': True},
+        {'bill_id': 70000002, 'store_id': 10000002, 'date': '2022-09-24', 'customer_id': 60000001, 'transaction_completed': True},
+        {'bill_id': 70000003, 'store_id': 10000003, 'date': '2022-09-25', 'customer_id': 60000002, 'transaction_completed': True},
+        {'bill_id': 70000004, 'store_id': 10000001, 'date': '2022-09-25', 'customer_id': 60000002, 'transaction_completed': True},
+        {'bill_id': 70000005, 'store_id': 10000002, 'date': '2022-10-22', 'customer_id': 60000003, 'transaction_completed': True}
     ]
 
     product_bill_list = [
