@@ -94,7 +94,8 @@ def create_schema(engine):
                          Column('address', String(255), nullable=False),
                          Column('email', String(100), nullable=False),
                          Column('phone_no', String(15), nullable=False),
-                         Column('country', String(100), nullable=False)
+                         Column('country', String(100), nullable=False),
+                         UniqueConstraint('manufacturer_name', 'address', 'phone_no', 'country', name='unique_key_manufacturer')
                          )
 
     product = Table('product', metadata_obj,
@@ -104,7 +105,8 @@ def create_schema(engine):
                     Column('points_offered', Float, default=0, nullable=False),
                     Column('description', String(1000), nullable=True, default=None),
                     Column('category_id', Integer, ForeignKey('category.category_id', onupdate='CASCADE'), nullable=True),
-                    Column('manufacturer_id', Integer, ForeignKey('manufacturer.manufacturer_id', onupdate='CASCADE'), nullable=True)
+                    Column('manufacturer_id', Integer, ForeignKey('manufacturer.manufacturer_id', onupdate='CASCADE'), nullable=True),
+                    UniqueConstraint('product_name', 'weight_gm', 'points_offered', 'description', 'category_id', 'manufacturer_id', name='unique_key_product')
                     )
 
     product_lot = Table('product_lot', metadata_obj,
@@ -113,7 +115,8 @@ def create_schema(engine):
                         Column('expiry_date', Date, nullable=False),
                         Column('price', Float, nullable=False),
                         Column('discount', Float, default=0, nullable=False),
-                        Column('product_id', Integer, ForeignKey('product.product_id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+                        Column('product_id', Integer, ForeignKey('product.product_id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False),
+                        UniqueConstraint('manufacture_date', 'expiry_date', 'price', 'discount', 'product_id', name='unique_key_product_lot')
                         )
 
     store_product = Table('store_product', metadata_obj,
@@ -129,7 +132,8 @@ def create_schema(engine):
                      Column('address', String(255), nullable=False),
                      Column('email', String(100), nullable=False),
                      Column('phone_no', String(15), nullable=False),
-                     Column('points_collected', Float, nullable=False)
+                     Column('points_collected', Float, nullable=False),
+                     UniqueConstraint('customer_id', 'customer_name', 'gender', 'address', 'email', 'phone_no', 'points_collected', name='unique_key_customer')
                      )
 
     bill = Table('bill', metadata_obj,
