@@ -91,6 +91,7 @@ def create_schema(engine):
     manufacturer = Table('manufacturer', metadata_obj,
                          Column('manufacturer_id', Integer, primary_key=True),
                          Column('manufacturer_name', String(255), nullable=False),
+                         Column('address', String(255), nullable=False),
                          Column('email', String(100), nullable=False),
                          Column('phone_no', String(15), nullable=False),
                          Column('country', String(100), nullable=False)
