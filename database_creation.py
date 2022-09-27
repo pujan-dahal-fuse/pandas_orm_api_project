@@ -101,8 +101,8 @@ def create_schema(engine):
                     Column('weight_gm', Float, nullable=False),
                     Column('points_offered', Float, default=0, nullable=False),
                     Column('description', String(1000), nullable=True, default=None),
-                    Column('category_id', Integer, ForeignKey('category.category_id', onupdate='CASCADE'), nullable=False),
-                    Column('manufacturer_id', Integer, ForeignKey('manufacturer.manufacturer_id', onupdate='CASCADE'), nullable=False)
+                    Column('category_id', Integer, ForeignKey('category.category_id', onupdate='CASCADE'), nullable=True),
+                    Column('manufacturer_id', Integer, ForeignKey('manufacturer.manufacturer_id', onupdate='CASCADE'), nullable=True)
                     )
 
     product_lot = Table('product_lot', metadata_obj,
@@ -132,9 +132,8 @@ def create_schema(engine):
     bill = Table('bill', metadata_obj,
                  Column('bill_id', Integer, primary_key=True, autoincrement=True),
                  Column('date', Date, nullable=False),
-                 Column('transaction_completed', Boolean, default=False, nullable=False),
-                 Column('customer_id', ForeignKey('customer.customer_id', onupdate='CASCADE'), nullable=False),
-                 Column('store_id', ForeignKey('store.store_id', onupdate='CASCADE'), nullable=False)
+                 Column('customer_id', ForeignKey('customer.customer_id', onupdate='CASCADE'), nullable=True),
+                 Column('store_id', ForeignKey('store.store_id', onupdate='CASCADE'), nullable=True)
                  )
 
     # since product_bill has foreign key attribute bill_id, so bill must be created first
@@ -144,11 +143,13 @@ def create_schema(engine):
     # when all products are added to products_bill table, we make transaction_completed= True
 
     product_bill = Table('product_bill', metadata_obj,
-                         Column('product_lot_id', ForeignKey('product_lot.product_lot_id', onupdate='CASCADE'), primary_key=True),
+                         Column('product_lot_id', ForeignKey('product_lot.product_lot_id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True),
                          Column('bill_id', ForeignKey('bill.bill_id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True),
+                         Column('quantity', Integer, nullable=False)
                          )
     
     metadata_obj.create_all(engine)
+
 
 
 def insert_initial_records(engine):
@@ -249,19 +250,19 @@ def insert_initial_records(engine):
     ]
 
     bill_list = [
-        {'bill_id': 70000001, 'store_id': 10000001, 'date': '2022-09-23', 'customer_id': 60000001, 'transaction_completed': True},
-        {'bill_id': 70000002, 'store_id': 10000002, 'date': '2022-09-24', 'customer_id': 60000001, 'transaction_completed': True},
-        {'bill_id': 70000003, 'store_id': 10000003, 'date': '2022-09-25', 'customer_id': 60000002, 'transaction_completed': True},
-        {'bill_id': 70000004, 'store_id': 10000001, 'date': '2022-09-25', 'customer_id': 60000002, 'transaction_completed': True},
-        {'bill_id': 70000005, 'store_id': 10000002, 'date': '2022-10-22', 'customer_id': 60000003, 'transaction_completed': True}
+        {'bill_id': 70000001, 'store_id': 10000001, 'date': '2022-09-23', 'customer_id': 60000001},
+        {'bill_id': 70000002, 'store_id': 10000002, 'date': '2022-09-24', 'customer_id': 60000001},
+        {'bill_id': 70000003, 'store_id': 10000003, 'date': '2022-09-25', 'customer_id': 60000002},
+        {'bill_id': 70000004, 'store_id': 10000001, 'date': '2022-09-25', 'customer_id': 60000002},
+        {'bill_id': 70000005, 'store_id': 10000002, 'date': '2022-10-22', 'customer_id': 60000003}
     ]
 
     product_bill_list = [
-        {'bill_id': 70000001, 'product_lot_id': 50000001},
-        {'bill_id': 70000001, 'product_lot_id': 50000006},
-        {'bill_id': 70000002, 'product_lot_id': 50000002},
-        {'bill_id': 70000003, 'product_lot_id': 50000003},
-        {'bill_id': 70000004, 'product_lot_id': 50000005}
+        {'bill_id': 70000001, 'product_lot_id': 50000001, 'quantity': 1},
+        {'bill_id': 70000001, 'product_lot_id': 50000006, 'quantity': 10},
+        {'bill_id': 70000002, 'product_lot_id': 50000002, 'quantity': 21},
+        {'bill_id': 70000003, 'product_lot_id': 50000003, 'quantity': 33},
+        {'bill_id': 70000004, 'product_lot_id': 50000005, 'quantity': 22}
     ]
 
     table_dict = {
