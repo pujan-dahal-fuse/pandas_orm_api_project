@@ -125,6 +125,7 @@ def create_schema(engine):
     customer = Table('customer', metadata_obj,
                      Column('customer_id', Integer, primary_key=True, autoincrement=True),
                      Column('customer_name', String(100), nullable=False),
+                     Column('gender', String(1), nullable=False),
                      Column('address', String(255), nullable=False),
                      Column('email', String(100), nullable=False),
                      Column('phone_no', String(15), nullable=False),
@@ -246,9 +247,9 @@ def insert_initial_records(engine):
     ]
 
     customer_list = [
-        {'customer_id': 60000001, 'customer_name': 'Pujan Dahal', 'address': 'Baneshwor, Kathmandu', 'email': 'pujan.dahal@fusemachines.com', 'phone_no': '9845763125', 'points_collected': 0},
-        {'customer_id': 60000002, 'customer_name': 'Shijal Sharma Poudel', 'address': 'Maharajgunj, Kathmandu', 'email': 'shijal@fusemachines.com', 'phone_no': '9785641258', 'points_collected': 0},
-        {'customer_id': 60000003, 'customer_name': 'Baburam Shrestha', 'address': 'Sohrakhutte, Kathmandu', 'email': 'baburam@fusemachines.com', 'phone_no': '9875216478', 'points_collected': 11.5}
+        {'customer_id': 60000001, 'customer_name': 'Pujan Dahal', 'gender': 'M', 'address': 'Baneshwor, Kathmandu', 'email': 'pujan.dahal@fusemachines.com', 'phone_no': '9845763125', 'points_collected': 0},
+        {'customer_id': 60000002, 'customer_name': 'Shijal Sharma Poudel', 'gender': 'F', 'address': 'Maharajgunj, Kathmandu', 'email': 'shijal@fusemachines.com', 'phone_no': '9785641258', 'points_collected': 0},
+        {'customer_id': 60000003, 'customer_name': 'Baburam Shrestha', 'gender': 'M', 'address': 'Sohrakhutte, Kathmandu', 'email': 'baburam@fusemachines.com', 'phone_no': '9875216478', 'points_collected': 11.5}
     ]
 
     bill_list = [
