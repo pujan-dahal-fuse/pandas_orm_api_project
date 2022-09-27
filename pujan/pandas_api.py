@@ -1,7 +1,6 @@
 # we retrieve data from our Retail Store Management database, and try to get meaningful insights into the data
 from flask import Flask, jsonify, request
-from sqlalchemy import create_engine, MetaData, Table
-from sqlalchemy import select
+from sqlalchemy import create_engine, MetaData
 # for importing dbaddress
 from importlib.machinery import SourceFileLoader
 dbaddress = SourceFileLoader('dbaddress', '../dbaddress.py').load_module()
