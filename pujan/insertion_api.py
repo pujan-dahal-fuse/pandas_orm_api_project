@@ -147,7 +147,7 @@ def insert_product_lot():
         return jsonify({
             'status': 200,
             'message': 'Successfully inserted record into product_lot table',
-            'data': {}
+            'data': body
         })
 
     except InvalidInput as ii:
