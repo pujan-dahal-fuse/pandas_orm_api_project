@@ -133,7 +133,7 @@ def create_schema(engine):
                      Column('email', String(100), nullable=False),
                      Column('phone_no', String(15), nullable=False),
                      Column('points_collected', Float, nullable=False),
-                     UniqueConstraint('customer_id', 'customer_name', 'gender', 'address', 'email', 'phone_no', 'points_collected', name='unique_key_customer')
+                     UniqueConstraint('customer_name', 'gender', 'address', 'email', 'phone_no', 'points_collected', name='unique_key_customer')
                      )
 
     bill = Table('bill', metadata_obj,
