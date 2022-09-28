@@ -195,12 +195,14 @@ def store_popular_products_by_year(yr):
     grouped_df = grouped_df.loc[:, ['store_id', 'branch_name', 'product_id', 'product_name', 'total_quantity_sold', 'total_price_sold']]
 
     grouped_df = grouped_df.fillna('')
+    print(grouped_df)
     # change the dataframe to json
     result = grouped_df.to_json(orient='index')
     # load that json for further formatting
     parsed = json.loads(result)
 
     response_list = []
+
     for k, v in parsed.items():
         outer_dict = dict()
         store_dict = dict()
@@ -353,6 +355,8 @@ def total_monthly_sales_by_year(yr):
     grouped_df = grouped_df.merge(store_df, on='store_id', how='right', suffixes=['_left', ''])
     grouped_df = grouped_df[['store_id', 'branch_name', 'month', 'total_sales']]
     grouped_df = grouped_df.fillna('')
+
+    print(grouped_df)
 
     # change dataframe to json
     result = grouped_df.to_json(orient='index')
