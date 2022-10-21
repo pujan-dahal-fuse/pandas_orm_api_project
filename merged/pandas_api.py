@@ -663,7 +663,7 @@ def gender_category_sales():
 ##################
 
 # product details  in store
-@app.route('/api/store_product_detail/', methods=['GET'])
+@app.route('/api/store_product_detail', methods=['GET'])
 def api_store_product_detail():
     if request.method=="GET":
         try:
@@ -703,7 +703,7 @@ def api_store_product_detail():
             })
 
 # minimum product  in store
-@app.route('/api/min_stock/', methods=['GET'])
+@app.route('/api/min_stock', methods=['GET'])
 def api_min_stock():
     if request.method=="GET":
         try:
@@ -747,8 +747,8 @@ def api_min_stock():
             })
 
 
-
-@app.route('/api/max_stock/', methods=['GET'])
+# maximum product stocks in store
+@app.route('/api/max_stock', methods=['GET'])
 def api_max_stock():
     if request.method=="GET":
         try:
@@ -790,6 +790,7 @@ def api_max_stock():
             'status': 'Error',
             'message': 'Wrong Method',
             })
+
 # product details in branch
 @app.route('/api/branch/<string:branch>', methods=['GET'])
 def api_branch(branch):
@@ -932,7 +933,7 @@ def api_manufacturer(id):
 ##################
 
 #the total sales done by the manufacturer
-@app.route('/api/manufacturer_sales', methods=['GET'])
+@app.route('/api/total_manufacturer_sales', methods=['GET'])
 def manufacturer_sales():
     """Retrieve the total sales done by manufacturer and percentage of sales out of total"""
     

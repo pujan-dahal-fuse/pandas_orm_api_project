@@ -18,15 +18,8 @@ import numpy as np
 
 app = Flask(__name__)
 
-@app.route('/api/',methods=["GET"])
-def fun_api():
-    return jsonify({
-        'status':'success',
-        'message':"Api  is Running.....",
-    })
-
 # store details retrieve
-@app.route('/api/store/', methods=['GET'])
+@app.route('/api/store', methods=['GET'])
 def api_store():
     if request.method=="GET":
         try:
@@ -53,7 +46,7 @@ def api_store():
 
 
 # product deails retrieve
-@app.route('/api/product/', methods=['GET'])
+@app.route('/api/product', methods=['GET'])
 def api_product():
     if request.method=="GET":
         try:
@@ -80,7 +73,7 @@ def api_product():
             })
 
 # product lot  detailsretrieve
-@app.route('/api/product_lot/', methods=['GET'])
+@app.route('/api/product_lot', methods=['GET'])
 def api_product_lot():
     if request.method=="GET":
         try:
@@ -108,7 +101,7 @@ def api_product_lot():
 
 
 # store product details retrieve
-@app.route('/api/store_product/', methods=['GET'])
+@app.route('/api/store_product', methods=['GET'])
 def api_store_product():
     if request.method=="GET":
         try:
@@ -136,7 +129,7 @@ def api_store_product():
 
 
 # category details retrieve
-@app.route('/api/category/', methods=['GET'])
+@app.route('/api/category', methods=['GET'])
 def api_category():
     try:
         if request.method=="GET":
@@ -164,7 +157,7 @@ def api_category():
 
        
 # customer  detailsretrieve
-@app.route('/api/customer/', methods=['GET'])
+@app.route('/api/customer', methods=['GET'])
 def api_customer():
     if request.method=="GET":
         try:
@@ -191,7 +184,7 @@ def api_customer():
             })
 
 # manufacturer details retrieve
-@app.route('/api/manufacturer/', methods=['GET'])
+@app.route('/api/manufacturer', methods=['GET'])
 def api_manufacturer():
     if request.method=="GET":
         try:
@@ -218,7 +211,7 @@ def api_manufacturer():
             })
 
 # bill details retrieve
-@app.route('/api/bill/', methods=['GET'])
+@app.route('/api/bill', methods=['GET'])
 def api_bill():
     try:
         if request.method=="GET":
@@ -246,7 +239,7 @@ def api_bill():
 
 
 # product deails retrieve
-@app.route('/api/product_bill/', methods=['GET'])
+@app.route('/api/product_bill', methods=['GET'])
 def api_product_bill():
     if request.method=="GET":
         try:
